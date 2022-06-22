@@ -1,6 +1,8 @@
 # CoKE: Contextualized Knowledge Graph Embedding
 ## Introduction
 
+Source repo - https://github.com/PaddlePaddle/Research/tree/master/KG/CoKE
+
 This is the [PaddlePaddle](https://www.paddlepaddle.org.cn/) implementation of the [CoKE](https://arxiv.org/abs/1911.02168) model for Knowledge Graph Embedding(KGE).
 
 CoKE is a novel KGE paradigm that learns dynamic, flexible, and fully contextualized entity and relation representations for a given Knowledge Graph(KG).
@@ -26,18 +28,14 @@ The code has been tested running under the following environments:
 ## Model Training and Evaluation
 
 ### step1. Download dataset files
-Download dataset files used in our paper by running:
 
-```
-sh wget_datasets.sh
-```
 
-This will first download the 4 widely used KBC datasets ([FB15k&WN18](http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf),
+Download the 4 KBC datasets ([FB15k&WN18](http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf),
 [FB15k-237](https://www.aclweb.org/anthology/W15-4007/),
 [WN18RR](https://arxiv.org/abs/1707.01476))
 and 2 path query answering datasets ([wordnet_paths and freebase_paths](https://arxiv.org/abs/1506.01094)) .
 
-Then it organize the train/valid/test files as the following `data` directory:
+Then organize the train/valid/test files as the following `data` directory:
 
 ```
     data
@@ -68,14 +66,15 @@ Then it organize the train/valid/test files as the following `data` directory:
 ```
 
 ### step2. Data preprocess
-Data preprocess commands are given in `data_preprocess.sh`.  
-It takes raw train/valid/test files as input, and generates CoKE training and evaluation files.
 
-```
-sh data_preprocess.sh
-```
+For KBC preprocessing - see CoKE_preprocessing.ipynb
+
+TO-DO - Pathquery answering
 
 ### step3. Training
+
+See bin/fb15k_training.ipynb
+
 
 Model training commands are given in `kbc_train.sh` for KBC datasets, and `pathquery_train.sh` for pathquery datasets.
 These scripts take a configuration file and GPU-ids as input arguments.
@@ -160,16 +159,10 @@ These are also given in the `configs/${TASK}_job_config.sh` files.
 |pathqueryWN | L=12, H=256, A=4 | 5 | 0.1 | 1 |
 
 ## Citation
-If you use any source code included in this project in your work, please cite the following paper:
 
-```
 @article{wang2019:coke,
   title={CoKE: Contextualized Knowledge Graph Embedding},
   author={Wang, Quan and Huang, Pingping and Wang, Haifeng and Dai, Songtai and Jiang, Wenbin and Liu, Jing and Lyu, Yajuan and Wu, Hua},
   journal={arXiv:1911.02168},
   year={2019}
 }
-```
-
-## Copyright and License
-Copyright 2019 Baidu.com, Inc. All Rights Reserved Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
